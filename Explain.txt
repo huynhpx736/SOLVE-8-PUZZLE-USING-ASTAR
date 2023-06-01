@@ -1,0 +1,33 @@
+tạo class State đại diện cho 1 trạng thái của ô số có:
+data là 1 list chứa vị trí các ô số , vị trí trống thì đặt là 0, ví dụ data của start là
+						[2,8,3,1,6,4,7,0,5]
+par là trạng thái cha của trạng thái hiện tại có kiểu State, 
+g là số bước di chuyển từ trạng thái đầu đến trạng thái hiện tại
+h: số vị trí ô chữ khác nhau của trạng thái hiện tại và đích
+g và h để áp dụng A*
+op: toán tử di chuyển của trạng thái : như Move up down left right
+..Các hàm bổ trợ
+hàm lt so sánh giữa hai state, so sánh theo hàm f của A* = g + h
+cần hàm lt để áp dụng PriorityQueue sẽ sắp sắp các state có hàm f nhỏ hơn lên trước
+
+Tạo class Operator : các toán tử di chuyển của state: gồm Up, down left right (dựa theo vị trí hàng và cột 
+								của ô trống (số 0)
+Hàm Equal so sánh hai trạng thái có bằng nhau không, là điều kiện dừng trong A*
+Hàm Path trả về đường đi từ trạng thái đầu tiên đến trạng thái hiện tại
+hàm Hx là hàm đánh giá trong A* trả về số vị trí ô chữ khác nhau của trạng thái hiện tại và đích, so sánh
+			dựa vào số vị trí khác nhau trong data của 2 trạng thái, 
+			và trường hợp vị trí 0 trùng nhau và không trùng nhau
+hàm taciAstar đại diện thuật toán A*:
+đầu tiên tạo Open và Closed là PriorityQueue
+Thiết lập g hiện tại là 0, h là kết quả hàm Hx của trạng thái hiện tại và đích
+cho trạng thái đầu S vào Open
+Chạy Vòng lặp:
+Nếu Open rỗng, thì in ra không tìm thấy đường đi, kết thúc vòng, kết thúc hàm
+Nếu Open khác rỗng, lấy phần tử đầu tiên trong Open gọi là O (O=Open.get)
+Xét nếu O giống với đích G thì in ra đường đi SG(hàm Path) kết thúc chương trình
+Nếu O khác G: xét các bước di chuyển của O (Up, Down, Left, Move) là trạng thái con của O gọi là child
+Thiết lập các thành phần f, g , h cho child
+nếu child không có trong Open và không có Trong Closed thì cho nó vào Open
+Khi xét hết các bước di chuyển của O thì cho O vào Closed vì xem như đã duyệt qua nó
+Tiếp tục vòng lặp đến khi dừng 
+Hàm main lấy dữ liệu từ file, chạy chương trình.
