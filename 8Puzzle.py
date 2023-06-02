@@ -78,7 +78,7 @@ class Operator:
     def Up(self, s): #s la state
         if self.checkStateNull(s):
             return None
-        x, y = self.findPos(s)
+        x, y = self.findPos(s) #x la vi tri hang, i la vi tri cot
         if x == 0:
             return None
         return self.swap(s, x, y, self.i)
@@ -124,36 +124,16 @@ def Equal(O, G):
     return O == G
 
 def Path(O):
-    G=State(data= [1, 2, 3, 8, 0, 4, 7, 6, 5])
     if O.par != None:
-
         Path(O.par)
         if O.op.i == 0: print(Fore.RED+"Up")
         if O.op.i == 1: print(Fore.RED+"Down")
         if O.op.i == 2: print(Fore.RED+"Left")
         if O.op.i == 3: print(Fore.RED+"Right")
     O.Print()
-    # A = O.par
-    #
-    # for x in range(4):
-    #     if A!=None and A.op!=None and x != O.op.i:
-    #        # A.Print()
-    #         A.op.i = x
-    #         op = Operator(x)
-    #         child = op.Move(A)
-    #         if child == None:
-    #             continue
-    #         if x == 0: print("If Up")
-    #         if x == 1: print("If Down")
-    #         if x == 2: print("If Left")
-    #         if x == 3: print("If Right")
-    #         #child.Print()
-    #         child.g = A.g + 1
-    #         child.h = Hx(child, G)
-    #         child.Print()
 
 
-
+#ham danh gia tra ve so vi tri o chu khac nhau cua trang thai hien tai va trang thai dich
 def Hx(S, G):
     res = 0
     for i in range(9):
@@ -166,18 +146,16 @@ def Hx(S, G):
 def taciAstar(S, G):
     Open = PriorityQueue()
     Closed = PriorityQueue()
-    Open.put(S)
     S.g = 0
     S.h = Hx(S, G)
     Open.put(S)
     while True:
         if Open.empty() == True:
-            print('Khong tim thay duong di')
+            print(Fore.BLUE+"Khong tim thay duong di")
             return
         O = Open.get()
-        Closed.put(O)
         if Equal(O, G) == True:
-            print("Tim thay duong di:")
+            print(Fore.BLUE+"Tim thay duong di:")
             print()
             Path(O)
             return
@@ -190,6 +168,7 @@ def taciAstar(S, G):
             child = op.Move(O)
             if child == None:
                 continue
+            # in cac buoc di chuyen phia la cac trang thai con ra man hinh
             if i == 0: print("Up")
             if i == 1: print("Down")
             if i == 2: print("Left")
@@ -205,7 +184,7 @@ def taciAstar(S, G):
                 child.g = O.g + 1
                 child.h = Hx(child, G)
                 Open.put(child)
-
+        Closed.put(O)
 
 
 def draw_board(board):
