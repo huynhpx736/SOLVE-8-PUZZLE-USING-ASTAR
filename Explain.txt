@@ -13,7 +13,7 @@ cần hàm lt để áp dụng PriorityQueue sẽ sắp sắp các state có hà
 Tạo class Operator : các toán tử di chuyển của state: gồm Up, down left right (dựa theo vị trí hàng và cột 
 								của ô trống (số 0)
 Hàm Equal so sánh hai trạng thái có bằng nhau không, là điều kiện dừng trong A*
-Hàm Path trả về đường đi từ trạng thái đầu tiên đến trạng thái hiện tại
+Hàm Path trả về đường đi từ trạng thái đầu tiên đến trạng thái hiện tại(đệ quy đường đi nhờ lợi dụng trạng thái cha con)
 hàm Hx là hàm đánh giá trong A* trả về số vị trí ô chữ khác nhau của trạng thái hiện tại và đích, so sánh
 			dựa vào số vị trí khác nhau trong data của 2 trạng thái, 
 			và trường hợp vị trí 0 trùng nhau và không trùng nhau
@@ -30,4 +30,5 @@ Thiết lập các thành phần f, g , h cho child
 nếu child không có trong Open và không có Trong Closed thì cho nó vào Open
 Khi xét hết các bước di chuyển của O thì cho O vào Closed vì xem như đã duyệt qua nó
 Tiếp tục vòng lặp đến khi dừng 
-Hàm main lấy dữ liệu từ file, chạy chương trình.
+Hàm main lấy dữ liệu từ file taci.txt, chạy chương trình.
+Chương trình trả về quá trình bước đi trong hàm taciAstar và đường di từ trạng thái đầu tiên đến trạng thái đích
